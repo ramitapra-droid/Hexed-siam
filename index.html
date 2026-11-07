@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HEXED: SIAM | Discover Your Destiny</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{--gold:#d8bd83;--dark:#090711;--purple:#21152f;--cream:#eee5d4}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{margin:0;background:var(--dark);color:var(--cream);font-family:Prompt,sans-serif}
+
+button{font:inherit;cursor:pointer}
+
+nav{position:fixed;top:0;width:100%;z-index:10;padding:17px 7%;display:flex;justify-content:space-between;align-items:center;background:#090711dc;backdrop-filter:blur(12px);border-bottom:1px solid #b99b6033}
+
+.logo{font-family:Cinzel,serif;letter-spacing:3px;color:var(--gold);font-weight:700}
+
+nav a{color:#d8cdb8;text-decoration:none;font-size:12px;margin-left:18px}
+
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 20px 70px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#49305d 0%,#1c132b 36%,#090711 75%)}
+
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #d8bd8340;border-radius:50%;width:390px;height:390px;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 80px #9e70c522,inset 0 0 60px #9e70c522}
+
+.hero:after{width:500px;height:500px;border-style:dashed;animation:spin 80s linear infinite}
+
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+.hero-content{position:relative;z-index:1;max-width:760px}
+
+.eyebrow{color:var(--gold);letter-spacing:5px;font-size:11px}
+
+h1{font-family:Cinzel,serif;font-size:clamp(48px,12vw,100px);line-height:1.05;letter-spacing:5px;margin:22px 0;color:#f3e7cf;text-shadow:0 0 35px #d6b77555}
+
+.subtitle{font-family:Cinzel,serif;letter-spacing:5px;color:var(--gold);font-size:clamp(12px,3vw,18px)}
+
+.intro{max-width:520px;margin:28px auto;color:#c5b9ca;line-height:2;font-weight:300}
+
+.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#c6a76a,#80613b);color:#160f1d;padding:14px 28px;letter-spacing:2px;font-family:Cinzel,serif;font-weight:700;transition:.3s}
+
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 30px #d8bd8340}
+
+section{padding:95px 7%;scroll-margin-top:65px}
+
+.section-head{text-align:center;margin-bottom:45px}
+
+.section-head small{color:var(--gold);letter-spacing:4px;font-family:Cinzel,serif}
+
+.section-head h2{font:600 clamp(28px,6vw,43px) Cinzel,serif;margin:12px 0}
+
+.section-head p{color:#aaa0ad;font-size:13px}
+
+.realms{background:linear-gradient(#0c0913,#171020,#0c0913)}
+
+.realm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1000px;margin:auto}
+
+.realm{min-height:260px;padding:27px;border:1px solid #b99b6044;background:linear-gradient(145deg,#ffffff0b,#ffffff02);position:relative;overflow:hidden}
+
+.realm:after{content:attr(data-symbol);position:absolute;right:10px;bottom:-38px;font-size:130px;opacity:.09}
+
+.realm h3{font:700 27px Cinzel,serif;margin:8px 0}
+
+.realm .guardian{font-size:12px;letter-spacing:2px}
+
+.realm p{font-size:13px;color:#c2b8c8;line-height:1.9;max-width:330px}
+
+.realm .capital{font-size:11px;color:var(--gold);letter-spacing:1px}
+
+.aqua{border-color:#3a9b91}.aqua h3{color:#70d6c6}
+
+.ignis{border-color:#b95a3e}.ignis h3{color:#ed9867}
+
+.aeris{border-color:#9982c7}.aeris h3{color:#c8b5f0}
+
+.terra{border-color:#82934e}.terra h3{color:#b4c77b}
+
+.academy{background:radial-gradient(ellipse at center,#32213d,#0c0913 70%);text-align:center}
+
+.academy-box{max-width:720px;margin:auto;border:1px solid #d8bd8355;padding:45px 25px;background:#0b0814a8}
+
+.academy-box h2{font:600 34px Cinzel,serif;color:var(--gold)}
+
+.academy-box p{color:#c4b9c8;line-height:2;font-size:14px}
+
+.test{background:#100c18}
+
+.quiz-box{max-width:680px;margin:auto;border:1px solid #a88b5c66;padding:30px 24px;background:#171020}
+
+.progress{height:3px;background:#40344b;margin:15px 0 28px}
+
+.progress span{display:block;height:100%;background:var(--gold);transition:.3s}
+
+.q-count{font:12px Cinzel,serif;color:var(--gold);letter-spacing:2px}
+
+.question{font-size:20px;line-height:1.7;margin:18px 0 24px}
+
+.answers{display:grid;gap:12px}
+
+.answer{padding:15px 17px;text-align:left;color:#e8dfd0;background:#211a2b;border:1px solid #54445e;transition:.2s}
+
+.answer:hover{border-color:var(--gold);background:#30243a}
+
+.answer.selected{border-color:var(--gold);background:#48364c}
+
+.quiz-controls{display:flex;justify-content:space-between;align-items:center;margin-top:25px}
+
+.small-btn{padding:10px 18px;border:1px solid #8d754d;background:transparent;color:var(--gold)}
+
+.result{text-align:center;padding:15px 0}
+
+.result .sigil{font-size:70px;margin:15px}
+
+.result h2{font:700 42px Cinzel,serif;color:var(--gold);margin:10px}
+
+.result h3{font-size:16px;font-weight:400;color:#e3d2b0}
+
+.result p{line-height:2;color:#c8bdce;font-size:14px}
+
+.traits{color:var(--gold);letter-spacing:1px;font-size:12px;margin:20px 0}
+
+footer{text-align:center;padding:35px 15px;border-top:1px solid #b99b6033;color:#8e8294;font:11px Cinzel,serif;letter-spacing:2px}
+
+.hidden{display:none!important}
+
+@media(max-width:600px){nav{padding:14px 5%}nav a{font-size:10px;margin-left:9px}.realm-grid{grid-template-columns:1fr}.realm{min-height:220px}section{padding:75px 6%}.quiz-box{padding:23px 17px}.question{font-size:17px}}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+ <div class="logo">HEXED: SIAM</div>
+
+ <div><a href="#realms">REALMS</a><a href="#academy">ACADEMY</a><a href="#test">DESTINY</a></div>
+
+</nav>
+
+<header class="hero">
+
+ <div class="hero-content">
+
+  <div class="eyebrow">✦ THE ANCIENT MAGIC AWAKENS ✦</div>
+
+  <h1>HEXED<br>SIAM</h1>
+
+  <div class="subtitle">THE HIDDEN WORLD OF SIAM</div>
+
+  <p class="intro">เบื้องหลังม่านหมอกแห่งสยาม มีโลกเวทมนตร์ที่ถูกซ่อนเร้นมานานนับพันปี สี่อาณาจักรโบราณกำลังรอคอยผู้ที่จะมาปลุกพลังที่หลับใหล</p>
+
+  <button class="btn" onclick="document.querySelector('#test').scrollIntoView()">DISCOVER YOUR DESTINY ✦</button>
+
+ </div>
+
+</header>
+
+<section class="realms" id="realms">
+
+ <div class="section-head">
+
+  <small>THE FOUR ANCIENT REALMS</small>
+
+  <h2>สี่อาณาจักรแห่งสยาม</h2>
+
+  <p>สี่ธาตุ สี่ผู้พิทักษ์ หนึ่งโชคชะตา</p>
+
+ </div>
+
+ <div class="realm-grid">
+
+  <article class="realm aqua" data-symbol="🐉">
+
+   <div class="guardian">🐉 THE NAGA · WATER</div><h3>AQUA</h3>
+
+   <div class="capital">AMORNATHI · อมรนที</div>
+
+   <p>อาณาจักรใต้นทีแห่งพญานาค ผู้ควบคุมน้ำ น้ำแข็ง และหมอก ผู้เปี่ยมด้วยปัญญา ความเข้าใจ และความสามารถในการปรับตัว</p>
+
+  </article>
+
+  <article class="realm ignis" data-symbol="🦅">
+
+   <div class="guardian">🦅 THE GARUDA · FIRE</div><h3>IGNIS</h3>
+
+   <div class="capital">SURIYANAKHON · สุริยานคร</div>
+
+   <p>นครแห่งเปลวเพลิงบนยอดเขาไฟ ผู้สืบทอดพลังครุฑ ผู้กล้าหาญ ทะเยอทะยาน และเกิดมาเพื่อเป็นผู้นำ</p>
+
+  </article>
+
+  <article class="realm aeris" data-symbol="🪽">
+
+   <div class="guardian">🪽 THE KINNARI · WIND</div><h3>AERIS</h3>
+
+   <div class="capital">VEHANAKHON · เวหานคร</div>
+
+   <p>นครลอยฟ้าเหนือทะเลเมฆแห่งกินรี ผู้ควบคุมสายลมและภาพลวงตา รักอิสระ มีจินตนาการ และหลงใหลการค้นพบ</p>
+
+  </article>
+
+  <article class="realm terra" data-symbol="🗿">
+
+   <div class="guardian">🗿 THE YAKSHA · EARTH</div><h3>TERRA</h3>
+
+   <div class="capital">PHANALAI · พนาลัย</div>
+
+   <p>อาณาจักรแห่งป่าศักดิ์สิทธิ์และถ้ำคริสตัล ผู้สืบทอดพลังยักษ์ หนักแน่น ซื่อสัตย์ อดทน และพร้อมปกป้องคนสำคัญ</p>
+
+  </article>
+
+ </div>
+
+</section>
+
+<section class="academy" id="academy">
+
+ <div class="academy-box">
+
+  <div class="eyebrow">THE CENTER OF MAGICAL KNOWLEDGE</div>
+
+  <h2>AURELIA ACADEMY</h2>
+
+  <p>สถาบันเวทมนตร์กลางที่เปิดรับนักเรียนจากทั้งสี่อาณาจักร อายุ 13–18 ปี เพื่อศึกษา Natural Magic และ Occult Arts ศาสตร์แห่งธาตุและศาสตร์อาคมที่สืบทอดจากบรรพชน</p>
+
+  <p>แต่ใต้รากฐานของสถาบัน ยังมีความลับเกี่ยวกับพลังต้นกำเนิดที่ถูกเรียกว่า <strong style="color:#d8bd83">PRIMORDIAL</strong></p>
+
+ </div>
+
+</section>
+
+<section class="test" id="test">
+
+ <div class="section-head">
+
+  <small>THE DESTINY CEREMONY</small>
+
+  <h2>WHICH KINGDOM IS YOUR DESTINY?</h2>
+
+  <p>ตอบคำถามทั้ง 6 ข้อ เพื่อค้นหาอาณาจักรที่แท้จริงของคุณ</p>
+
+ </div>
+
+ <div class="quiz-box">
+
+  <div id="quiz">
+
+   <div class="q-count" id="qcount">QUESTION 01 / 06</div>
+
+   <div class="progress"><span id="bar" style="width:16.6%"></span></div>
+
+   <div class="question" id="question"></div>
+
+   <div class="answers" id="answers"></div>
+
+   <div class="quiz-controls">
+
+    <button class="small-btn" id="back" onclick="previous()" disabled>← BACK</button>
+
+    <span id="step" style="font-size:11px;color:#9f91a7">เลือกคำตอบหนึ่งข้อ</span>
+
+    <button class="btn" id="next" onclick="next()" style="padding:10px 18px">NEXT →</button>
+
+   </div>
+
+  </div>
+
+  <div class="result hidden" id="result"></div>
+
+ </div>
+
+</section>
+
+<footer>HEXED: SIAM · A WORLD BEYOND THE ORDINARY<br><br>AN ORIGINAL THAI FANTASY UNIVERSE</footer>
+
+<script>
+
+const realms={
+
+ AQUA:{symbol:"🐉",guardian:"THE NAGA · ผู้พิทักษ์แห่งสายน้ำ",motto:"WISDOM FLOWS LIKE WATER",traits:"WISDOM · EMPATHY · ADAPTABILITY",desc:"คุณคือผู้มีจิตใจลึกซึ้ง สุขุม และเข้าใจความรู้สึกของผู้อื่น คุณปรับตัวได้แม้ในวันที่โลกเปลี่ยนแปลง จงเชื่อมั่นในสัญชาตญาณและปัญญาภายในของตัวเอง"},
+
+ IGNIS:{symbol:"🦅",guardian:"THE GARUDA · ผู้พิทักษ์แห่งเปลวเพลิง",motto:"RISE ABOVE ALL",traits:"COURAGE · AMBITION · LEADERSHIP",desc:"คุณคือผู้กล้าที่ไม่ยอมแพ้ต่ออุปสรรค มีความทะเยอทะยานและพร้อมยืนหยัดเพื่อสิ่งที่เชื่อ คุณมีประกายของผู้นำที่พร้อมสร้างเส้นทางของตัวเอง"},
+
+ AERIS:{symbol:"🪽",guardian:"THE KINNARI · ผู้พิทักษ์แห่งสายลม",motto:"BORN TO BE FREE",traits:"FREEDOM · CREATIVITY · CURIOSITY",desc:"คุณคือจิตวิญญาณแห่งอิสระ มีความคิดสร้างสรรค์และมองเห็นความเป็นไปได้ที่คนอื่นอาจมองข้าม คุณเกิดมาเพื่อสำรวจ ทดลอง และสร้างสิ่งใหม่"},
+
+ TERRA:{symbol:"🗿",guardian:"THE YAKSHA · ผู้พิทักษ์แห่งผืนดิน",motto:"STRONG ROOTS, STRONG SOUL",traits:"LOYALTY · STABILITY · PROTECTION",desc:"คุณคือผู้ที่คนรอบข้างพึ่งพาได้ หนักแน่น อดทน และซื่อสัตย์ คุณอาจไม่ใช่คนที่ส่งเสียงดังที่สุด แต่ความมั่นคงและความห่วงใยของคุณคือพลังที่ยิ่งใหญ่"}
+
+};
+
+const questions=[
+
+ {q:"เพื่อนร่วมทีมทำพลาดจนภารกิจเกือบล้มเหลว คุณจะทำอย่างไร?",a:[["ช่วยประคองทุกคนและหาทางแก้ร่วมกัน","AQUA"],["ลุกขึ้นรับผิดชอบและนำทีมทันที","IGNIS"],["คิดวิธีใหม่ที่ไม่มีใครเคยลอง","AERIS"],["ตั้งหลักและแก้ปัญหาทีละขั้น","TERRA"]]},
+
+ {q:"คุณพบแผนที่ลึกลับที่ไม่มีใครอ่านออก สิ่งแรกที่คุณจะทำคือ?",a:[["สังเกตสัญลักษณ์และค้นหาความหมาย","AQUA"],["ออกเดินทางไปยังจุดหมายทันที","IGNIS"],["ทดลองถอดรหัสด้วยวิธีแปลกใหม่","AERIS"],["เก็บแผนที่ไว้และตรวจสอบให้แน่ใจก่อน","TERRA"]]},
+
+ {q:"ถ้าต้องเผชิญหน้ากับความกลัว คุณจะเลือกอะไร?",a:[["ความไม่แน่นอนของความรู้สึก","AQUA"],["ความล้มเหลวในการทำตามเป้าหมาย","IGNIS"],["การถูกจำกัดอิสรภาพ","AERIS"],["การสูญเสียคนที่รัก","TERRA"]]},
+
+ {q:"ในกลุ่มเพื่อน คุณมักเป็นคนแบบไหน?",a:[["คนที่รับฟังและเข้าใจทุกคน","AQUA"],["คนที่กล้าตัดสินใจและพาทุกคนไปต่อ","IGNIS"],["คนสร้างสีสันและไอเดียใหม่ ๆ","AERIS"],["คนที่คอยดูแลและอยู่ข้างทุกคน","TERRA"]]},
+
+ {q:"ประตูวิเศษเปิดได้เพียงครั้งเดียว คุณจะใช้มันเพื่ออะไร?",a:[["ค้นหาความจริงที่โลกซ่อนไว้","AQUA"],["พิชิตสิ่งที่ท้าทายที่สุด","IGNIS"],["เดินทางไปยังโลกที่ไม่เคยมีใครพบ","AERIS"],["ปกป้องสถานที่หรือคนที่สำคัญ","TERRA"]]},
+
+ {q:"เมื่อทุกอย่างไม่เป็นไปตามแผน อะไรทำให้คุณไปต่อ?",a:[["ความเข้าใจและความหวัง","AQUA"],["ความมุ่งมั่นที่จะไม่ยอมแพ้","IGNIS"],["ความเชื่อว่ายังมีทางเลือกอื่น","AERIS"],["ความรับผิดชอบต่อสิ่งที่รัก","TERRA"]]}
+
+];
+
+let current=0,answers=Array(6).fill(null);
+
+function render(){
+
+ const q=questions[current];
+
+ document.getElementById("qcount").textContent=`QUESTION ${String(current+1).padStart(2,"0")} / 06`;
+
+ document.getElementById("bar").style.width=((current+1)/6*100)+"%";
+
+ document.getElementById("question").textContent=q.q;
+
+ document.getElementById("answers").innerHTML="";
+
+ q.a.forEach((a,i)=>{
+
+  const b=document.createElement("button");
+
+  b.className="answer"+(answers[current]===a[1]?" selected":"");
+
+  b.textContent=String.fromCharCode(65+i)+".  "+a[0];
+
+  b.onclick=()=>{answers[current]=a[1];render()};
+
+  document.getElementById("answers").appendChild(b);
+
+ });
+
+ document.getElementById("back").disabled=current===0;
+
+ document.getElementById("next").textContent=current===5?"REVEAL DESTINY ✦":"NEXT →";
+
+ document.getElementById("step").textContent=answers[current]?"เลือกแล้ว":"เลือกคำตอบหนึ่งข้อ";
+
+}
+
+function next(){
+
+ if(!answers[current]){document.getElementById("step").textContent="กรุณาเลือกคำตอบก่อนนะ";return}
+
+ if(current<5){current++;render()}else reveal();
+
+}
+
+function previous(){if(current>0){current--;render()}}
+
+function reveal(){
+
+ const score={AQUA:0,IGNIS:0,AERIS:0,TERRA:0};
+
+ answers.forEach(x=>score[x]++);
+
+ const max=Math.max(...Object.values(score));
+
+ const winners=Object.keys(score).filter(x=>score[x]===max);
+
+ const name=winners[Math.floor(Math.random()*winners.length)];
+
+ const r=realms[name];
+
+ document.getElementById("quiz").classList.add("hidden");
+
+ const el=document.getElementById("result");
+
+ el.classList.remove("hidden");
+
+ el.innerHTML=`<div class="eyebrow">YOUR DESTINY HAS BEEN REVEALED</div>
+
+ <div class="sigil">${r.symbol}</div><div class="q-count">YOU BELONG TO</div>
+
+ <h2>${name}</h2><h3>${r.guardian}</h3>
+
+ <div class="traits">${r.traits}</div><p>${r.desc}</p>
+
+ <p style="color:#d8bd83;font-family:Cinzel,serif;letter-spacing:2px">${r.motto}</p>
+
+ <button class="btn" onclick="shareResult('${name}')">SHARE YOUR DESTINY ✦</button>
+
+ <br><br><button class="small-btn" onclick="restart()">TAKE THE TEST AGAIN ↻</button>`;
+
+}
+
+function restart(){current=0;answers=Array(6).fill(null);document.getElementById("result").classList.add("hidden");document.getElementById("quiz").classList.remove("hidden");render()}
+
+function shareResult(name){
+
+ const text=`My destiny belongs to ${name} in HEXED: SIAM! Discover your magical kingdom.`;
+
+ if(navigator.share){navigator.share({title:"HEXED: SIAM",text,url:location.href}).catch(()=>{})}
+
+ else if(navigator.clipboard){navigator.clipboard.writeText(text+" "+location.href).then(()=>alert("คัดลอกผลลัพธ์แล้ว!"))}
+
+ else{alert(text)}
+
+}
+
+render();
+
+</script>
+
+</body>
+
+</html>
